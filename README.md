@@ -1,12 +1,12 @@
-# MySqlDumpParser #
+# MySqlDumpParser (Java MR/PigLatin)#
 
 
 ---------
-Map only MapReduce Application to convert mysqldump generated SQL files into tab delimted, new line terminated flat files in HDFS.
+Map only Java MapReduce Application and alternative Apache Pig script to convert mysqldump generated SQL files into tab delimted, new line terminated flat files in HDFS.
 
 For use when sqoop is not available or not an option, eg ingesting historical mysql dumps.
 
-Usage:
+Java MR Usage:
 
 
     \# dump table to SQL
@@ -22,4 +22,10 @@ Usage:
     \# run program
     hadoop jar mysqldumpparser.jar MySqlDumpParser tabledata_raw tabledata
 
+Pig Usage:
+
+    import 'mysql_dump_parser.pig';
+    mysqltable = mysql_dump_parser('mysqldump_file_or_dir');
+    mysqltablewithschema = FOREACH mysqltable GENERATE $0 as col1:int, ...;
+    
 *Windows to Big Data, April 2014* 
